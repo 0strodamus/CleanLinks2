@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+	<Description about="urn:mozilla:install-manifest">
+		<em:id>{158d7cb3-7039-4a75-8e0b-3bd0a464edd2}</em:id>
+		<em:type>2</em:type>
+		<em:name>CleanLinks2</em:name>
+		<em:version>1.0</em:version>
+		<em:creator>0strodamus</em:creator>
+		<em:originalcreator>Diego Casorran</em:originalcreator> <!-- thanks for creating all of your great XUL extensions -->
+		<em:contributor>Cimbali</em:contributor> <!-- thanks for "Un-obfuscate code" commit
+		https://github.com/Cimbali/CleanLinks/commit/c1062584679cbe3aa7dfbf73e6fe4822e7de5bfc -->
+		<em:description>Converts obfuscated/nested links to genuine clean links (Clean Links 2.0 fork).</em:description>
+		<em:targetApplication>
+			<Description>
+				<!--Pale Moon-->
+				<em:id>{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}</em:id>
+				<em:minVersion>3.6</em:minVersion>
+				<em:maxVersion>*</em:maxVersion>
+			</Description>
+		</em:targetApplication>
+		<em:targetApplication>
+			<Description>
+				<!-- Firefox -->
+				<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+				<em:minVersion>3.6</em:minVersion>
+				<em:maxVersion>56.*</em:maxVersion>
+			</Description>
+		</em:targetApplication>
+	</Description>
+</RDF>
