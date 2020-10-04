@@ -1,0 +1,15 @@
+pref('extensions.cleanlinks.enabled',true);
+pref('extensions.cleanlinks.skipwhen','auth\?client_id|bing\.com/widget|imgres\?|([Ll]og|[Ss]ign)(in|off|on|out|up)|magnet:|oauth2?|register|ServiceLogin|searchbyimage\?|subscribe|submit\?url=|sVidLoc|verification|watch\?v');
+pref('extensions.cleanlinks.removewhen','(?:ref|aff)\w*|_+(?:ga|mk|nc|openstat|share|tn|trk|twitter_|xts)\w*|(?:ad|at|fb|ga|gs|hc|hmb|ns|otm|pk|sc|tt|utm)_\w+|action_\w+_map|(?:algo_(exp|pv)|bts|cmp|coli?|c(r|u|v)?|(d|e)|fb|(d|fb|g|y)cl|igsh|k_click|mb|merchant|(nc|pv|rn)|programme|media|oc|s(hare.?|m|r)?|track|wtr|_(request|trks)|(_branch_match|can|correlation|hsa_cr|int|link)_)id|mr:\w+|mrfcachebuster');
+pref('extensions.cleanlinks.sitespecdoms','google.com(ei|uact|ved),youtube.com(feature)');
+pref('extensions.cleanlinks.skipdoms','amazon.com/gp,google.com/recaptcha/,mcstatic.com,openid.ns,signin.ebay.com,web.archive.org,website-archive.mozilla.org');
+pref('extensions.cleanlinks.bypassdoms','eff.org,fsf.org');
+pref('extensions.cleanlinks.baddoms','blabbermouth.net(885fm|search\?[qs])');
+pref('extensions.cleanlinks.decorate',true);
+pref('extensions.cleanlinks.highlight',false);
+pref('extensions.cleanlinks.hlstyle',"background: rgba(252,252,0,0.6); color: #000");
+pref('extensions.cleanlinks.tooltip',"disabled");
+pref('extensions.cleanlinks.logging',false);
+pref('extensions.cleanlinks.mutationobserver',true);
+pref('extensions.cleanlinks.wpmodobserver',false);
+pref('extensions.cleanlinks.cleandelay',"0.75");
