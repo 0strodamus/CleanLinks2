@@ -12,3 +12,5 @@ _For example:_
 - javascript:window.open('http://somesite.com') ➠ <http://somesite.com/>
 
 It also allows to remove affiliate/tracking tags from URLs by the use of configurable patterns.
+
+I would like to thank [diegocr](https://github.com/diegocr/CleanLinks) for creating and sharing the original extension and [Cimbali](https://github.com/Cimbali/CleanLinks/commit/c1062584679cbe3aa7dfbf73e6fe4822e7de5bfc) for the initial unobfuscation commit.
