@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<vbox xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+	<setting pref="extensions.cleanlinks.skipwhen" type="string" title="Skip Links matching with:" desc="regexp_pattern: /regexp_pattern/"
+		tooltiptext="This is a case-sensitive regular expression pattern that will exclude links from being modified. The regexp_pattern entered will be processed as &quot;/regexp_pattern/&quot;."></setting> <!-- " character needs to be escaped as &quot; in XML/XUL -->
+
+	<setting pref="extensions.cleanlinks.skipdoms" type="string" title="Skip Domains matching with:" desc="links containing these domains will not be cleaned"
+	tooltiptext="This is a case-insensitive, comma-delimited list of domains that will exclude links containing these domains from being modified. Partial domain paths can be used, for example &quot;google.com/recaptcha&quot;."></setting>
+
+	<setting pref="extensions.cleanlinks.removewhen" type="string" title="Remove From Links:" desc="regexp_pattern: /\b(regexp_pattern)=.+?(&amp;|$)/gi"
+		tooltiptext="This is a case-insensitive regular expression pattern that will modify links to remove redirects and tracking tags. The regexp_pattern entered will be processed as &quot;/\b(regexp_pattern)=.+?(&amp;|$)/gi&quot;."></setting> <!-- & character needs to be escaped as &amp; in XML/XUL -->
+
+	<setting pref="extensions.cleanlinks.sitespecdoms" type="string" title="Site Specific Remove From Links:" desc="domains with site specific remove regex"
+	tooltiptext="This is a case-insensitive, comma-delimited list of domains with regular expression patterns to clean links. Add remove regex to domains using the format &quot;domain.com(regexp_pattern)&quot;. Partial domain paths can be used. Any domains missing a regular expression pattern will be ignored. The regexp_pattern entered will be processed as &quot;/\b(regexp_pattern)=.+?(&amp;|$)/gi&quot;.&#010;&#010;This setting has priority over &quot;Skip Links matching with:&quot;, &quot;Skip Domains matching with:&quot;, and &quot;Untrusted Domains:&quot;.&#010;&#010;For best performance, use &quot;Remove From Links:&quot; whenever possible and try to limit the amount of domains in &quot;Site Specific Remove From Links:&quot;."></setting> <!-- newline character needs to be escaped as &#010; and carriage return is &#13;&#10; in XML/XUL -->
+
+	<setting pref="extensions.cleanlinks.bypassdoms" type="string" title="Trusted Domains:" desc="these domains will have NO links cleaned"
+	tooltiptext="This is a case-insensitive, comma-delimited list of domains to clean NO links. This means CleanLinks2 will effectively be disabled on these domains. Partial domain paths can be used."></setting>
+
+	<setting pref="extensions.cleanlinks.baddoms" type="string" title="Untrusted Domains:" desc="these domains will have ALL links cleaned"
+	tooltiptext="This is a case-insensitive, comma-delimited list of domains to clean ALL links with optional case-sensitive skip links regular expression pattern. Every link will be stripped of ALL tags whether tracking or not unless there is a match in the &quot;Skip Links matching with:&quot; or &quot;Skip Domains matching with:&quot; settings or the domain has an optional skip regex. Partial domain paths can be used. The regexp_pattern entered will be processed as &quot;/regexp_pattern/&quot;.&#010;&#010;To add a skip regex to a domain, use the format &quot;domain.com(regexp_pattern)&quot;."></setting>
+
+	<setting pref="extensions.cleanlinks.cleandelay" type="menulist" title="Delay Link Cleaning?"
+		tooltiptext="Delays cleaning to assist with detection of links (e.g. pages with embedded tweets).">
+		<menulist>
+			<menupopup>
+				<menuitem label="Disabled" value="0.0"/>
+				<menuitem label="0.25 seconds" value="0.25"/>
+				<menuitem label="0.5 seconds" value="0.5"/>
+				<menuitem label="0.75 seconds" value="0.75"/>
+				<menuitem label="1 second" value="1.0"/>
+				<menuitem label="1.25 seconds" value="1.25"/>
+				<menuitem label="1.5 seconds" value="1.5"/>
+				<menuitem label="1.75 seconds" value="1.75"/>
+				<menuitem label="2 seconds" value="2.0"/>
+				<menuitem label="2.5 seconds" value="2.5"/>
+				<menuitem label="3 seconds" value="3.0"/>
+				<menuitem label="3.5 seconds" value="3.5"/>
+				<menuitem label="4 seconds" value="4.0"/>
+				<menuitem label="4.5 seconds" value="4.5"/>
+				<menuitem label="5 seconds" value="5.0"/>
+			</menupopup>
+		</menulist>
+		</setting> <!-- make sure that all delay values include a decimal point -->
+
+	<setting pref="extensions.cleanlinks.mutationobserver" type="bool" title="Use Link Attribute Mutation Observer?" desc="monitors cleaned links"
+		tooltiptext="Enables a Mutation Observer to monitor post-cleaning link attribute changes and re-clean as needed."></setting>
+
+	<setting pref="extensions.cleanlinks.wpmodobserver" type="bool" title="Use Webpage Modification Observer?" desc="re-cleans webpages with dynamic content"
+		tooltiptext="Enables an http-on-modify-request observer to monitor webpage changes and re-clean as needed.&#010;&#010;For best performance, use the Link Attribute Mutation Observer.&#010;Both perform almost identical functions, however the Webpage Modification Observer triggers much more frequently for changes unrelated to links resulting in more link scanning than is actually needed."></setting>
+
+	<setting pref="extensions.cleanlinks.logging" type="bool" title="Log Cleaned Links?" tooltiptext="Logs all link cleaning details to the browser console."></setting>
+
+	<setting pref="extensions.cleanlinks.tooltip" type="menulist" title="Show Tooltip?"
+		tooltiptext="Displays a tooltip over hovered cleaned links.&#010;&#010;Disabled displays no tooltip.&#010;Classic displays the original &quot;Cleanlinks Touch!&quot; tooltip.&#010;Detailed displays the original and cleaned links.">
+		<menulist>
+			<menupopup>
+				<menuitem label="Disabled" value="disabled"/>
+				<menuitem label="Classic" value="classic"/>
+				<menuitem label="Detailed" value="detailed"/>
+			</menupopup>
+		</menulist>
+	</setting>
+
+	<setting pref="extensions.cleanlinks.decorate" type="bool" title="Decorate Cleaned Links?"
+	tooltiptext="Adds a subtle dotted underline effect to all cleaned links."></setting>
+
+	<setting pref="extensions.cleanlinks.highlight" type="bool" title="Highlight Cleaned Links?"
+	tooltiptext="Adds a highlighter effect to all cleaned links."></setting>
+
+	<setting pref="extensions.cleanlinks.hlstyle" type="string" title="Highlight Cleaned Links Style:"
+	tooltiptext="CSS style to be applied to highlighted cleaned links.&#010;&#010;Note that other semicolon-delimited attributes can be added, but do not include a trailing &quot;;&quot;.">
+	</setting>
+
+	<setting title="" type="control" tooltiptext="Reset options to their default values.">
+		<button id="cleanlinks-resetoptions-button" type="button" label="Reset Options" image="moz-icon://stock/edit-clear-all?size=menu"/>
+	</setting>
+</vbox>
