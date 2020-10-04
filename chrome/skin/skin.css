@@ -1,0 +1,24 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+#cleanlinks-status-bar-icon {
+	width:16px;
+	height:16px;
+}
+#cleanlinks-toolbar-button {
+	list-style-image: url("chrome://cleanlinks/skin/icon24.png");
+}
+toolbar[iconsize="small"] #cleanlinks-toolbar-button {
+	list-style-image: url("chrome://cleanlinks/skin/icon16.png");
+}
+#cleanlinks-toolbar-button[cl_active="true"] {
+	list-style-image: url("chrome://cleanlinks/skin/icon24!.png");
+}
+toolbar[iconsize="small"] #cleanlinks-toolbar-button[cl_active="true"] {
+	list-style-image: url("chrome://cleanlinks/skin/icon16!.png");
+}
+#cleanlinks-toolbar-button[cl_disabled="true"] {
+	list-style-image: url("chrome://cleanlinks/skin/icon24-.png");
+}
+toolbar[iconsize="small"] #cleanlinks-toolbar-button[cl_disabled="true"] {
+	list-style-image: url("chrome://cleanlinks/skin/icon16-.png");
+}
