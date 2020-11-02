@@ -273,7 +273,7 @@
 								}
 								if (/\?/g.test(h)) { // only strip links that actually contain tags
 									++nCleanedLinks;
-									h = h.replace(/\?\w+=.*/g, '#'); // we have a match, aggressively clean
+									h = h.replace(/\?\w+.*=.*/g, '#'); // we have a match, aggressively clean
 									if (this.prefValues.logging) {
 										cleanlinks.clLog('Untrusted Domain Original URL: '+links[nLinks].href+'\n>            Untrusted Domain Cleaned URL: '+h); // log cleaned URLs
 									}
