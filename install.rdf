@@ -4,7 +4,7 @@
 		<em:id>{158d7cb3-7039-4a75-8e0b-3bd0a464edd2}</em:id>
 		<em:type>2</em:type>
 		<em:name>CleanLinks2</em:name>
-		<em:version>1.0.1</em:version>
+		<em:version>1.0.2</em:version>
 		<em:creator>0strodamus</em:creator>
 		<em:originalcreator>Diego Casorran</em:originalcreator> <!-- thanks for creating all of your great XUL extensions -->
 		<em:contributor>Cimbali</em:contributor> <!-- thanks for "Un-obfuscate code" commit
