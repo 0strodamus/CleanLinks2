@@ -55,6 +55,7 @@
 					}
 					gBrowser.addEventListener('DOMContentLoaded', cleanlinks.onDocumentLoaded, false);
 					gBrowser.tabContainer.addEventListener("TabSelect", cleanlinks.onTabSelected, false);
+					gBrowser.addProgressListener(this); // used by onLocationChange function
 				}
 				cleanlinks.prefBranch.addObserver("", cleanlinks, false);
 				cleanlinks.observerService.addObserver(cleanlinks.clOptClickObs, "addon-options-displayed", false);
@@ -72,6 +73,7 @@
 					}
 					gBrowser.tabContainer.removeEventListener("TabSelect", cleanlinks.onTabSelected, false);
 					gBrowser.removeEventListener('DOMContentLoaded', cleanlinks.onDocumentLoaded, false);
+					gBrowser.removeProgressListener(this);
 				}
 			default:
 				break;
@@ -88,6 +90,33 @@
 				}
 			} catch (e) {}
 		 }, delaytime);
+		},
+		/*  This onLocationChange progress listener was added to clean pages that fail to consistently fire DOMContentLoaded
+		 *  during same-site navigation, thereby bypassing URL cleaning (issue discovered while browsing addons.mozilla.org).
+		 *  Adapted from "Example of listener for anchor change" found at:
+		 *  https://developer.mozilla.org/en-US/docs/Archive/Add-ons/Code_snippets/Progress_Listeners
+		 * 	Function is triggered via "gBrowser.addProgressListener(this);".
+		 *  QueryInterface function is never called in the examples and the onLocationChange code works without it.
+		 *  However, I'm leaving the code snippet here for easier implementation in case it really is needed.
+		 */
+		// nsIWebProgressListener
+		//    QueryInterface: XPCOMUtils.generateQI(["nsIWebProgressListener",
+		//                                           "nsISupportsWeakReference"]),
+		onLocationChange: function (aProgress, aRequest, aURI, aFlags) {
+			var delaytime = parseFloat(cleanlinks.prefValues.cleandelay) * 1000;
+			if (aFlags & Ci.nsIWebProgressListener.LOCATION_CHANGE_SAME_DOCUMENT) {
+				// exclude [object HTMLDocument] documents that are not ftp or http(s) pages
+				if (aProgress.DOMWindow.document instanceof HTMLDocument && (/^([hft]+tps?(?:\:|%3a).+)$/.test(aURI.spec))) {
+					//console.log('onLocationChange triggered on URL: '+aURI.spec);
+					setTimeout( function(){
+					//call cleanLinksInDoc() and set cleaned count (instead of letting countCleanLinksInDoc() do it) to prevent inaccurately high counts
+					let nCleanedLinks = 0;
+					nCleanedLinks = cleanlinks.cleanLinksInDoc(aProgress.DOMWindow.document);
+					aProgress.DOMWindow.document.body.setAttribute(cleanlinks.attr_cleaned_count, nCleanedLinks);
+					cleanlinks.clToggleObservers("on"); // links have been cleaned - start Observers
+					}, delaytime);
+				}
+			}
 		},
 		countCleanLinksInDoc: function (doc, isInnerDoc) {
 			// doc returns undefined or [object HTMLDocument] or 0 when called by prefs observer when toolbar icon toggled to enabled
@@ -580,11 +609,13 @@
 						document.getElementById('cleanlinks-toolbar-button').addEventListener('click', cleanlinks.clBtnClickLstnr, false);
 						gBrowser.addEventListener('DOMContentLoaded', this.onDocumentLoaded, false);
 						gBrowser.tabContainer.addEventListener("TabSelect", this.onTabSelected, false);
+						gBrowser.addProgressListener(this);
 						this.countCleanLinksInDoc(0, 1);
 						cleanlinks.clToggleObservers("on"); // links have been cleaned - start Observers
 					} else { // toolbar icon toggled to disabled
 						gBrowser.removeEventListener('DOMContentLoaded', this.onDocumentLoaded, false);
 						gBrowser.tabContainer.removeEventListener("TabSelect", this.onTabSelected, false);
+						gBrowser.removeProgressListener(this);
 						cleanlinks.clToggleObservers("off"); // stop Observers prior to restoring original links
 						this.UndoCleanLinksInDoc();
 						}
