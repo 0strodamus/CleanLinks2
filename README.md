@@ -5,7 +5,7 @@ This extension is a fork of Clean Links 2.0 for XUL designed to convert obfuscat
 
 _For example:_
 
-- <http://www.foobar.com/track=ftp://gnu.org> ➠ <ftp://gnu.org#>
+- <https://www.nytimes.com/interactive/2020/us/covid-19-vaccine-doses.html?utm_source=digg> ➠ <https://www.nytimes.com/interactive/2020/us/covid-19-vaccine-doses.html#>
 
 - <http://example.com/aHR0cDovL3d3dy5nb29nbGUuY29t> ➠ <http://www.google.com/#>
 
