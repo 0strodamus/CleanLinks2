@@ -5,9 +5,9 @@ This extension is a fork of Clean Links 2.0 for XUL designed to convert obfuscat
 
 _For example:_
 
-- <http://www.foobar.com/track=ftp://gnu.org> ➠ <ftp://gnu.org/>
+- <http://www.foobar.com/track=ftp://gnu.org> ➠ <ftp://gnu.org#>
 
-- <http://example.com/aHR0cDovL3d3dy5nb29nbGUuY29t> ➠ <http://www.google.com>
+- <http://example.com/aHR0cDovL3d3dy5nb29nbGUuY29t> ➠ <http://www.google.com/#>
 
 - javascript:window.open('http://somesite.com') ➠ <http://somesite.com/>
 
